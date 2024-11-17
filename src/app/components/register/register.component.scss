@@ -1,0 +1,71 @@
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  margin: 0;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.gap-2 > * + * {
+  margin-top: 1.5rem;
+}
+
+.btn-container {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  width: 100%;
+}
+
+.btn-container button {
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+}
+
+
+p-floatLabel {
+  display: block;
+  width: 100%;
+}
+
+p-floatLabel input,
+p-password input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 4px;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.fixed-dropdown .p-dropdown-label {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.box-shadow {
+  border: 1px solid #35a04c;
+  box-shadow: 5px 5px 15px rgba(72, 143, 116, 0.3);
+  padding: 50px;
+  border-radius: 5px;
+}
+
+h1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
