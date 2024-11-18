@@ -22,7 +22,6 @@ import { UserService } from '../../services/user/user.service';
     CommonModule,
     RouterModule,
     FloatLabelModule,
-    FormsModule,
     ButtonModule,
     NgStyle,
     InputTextModule,
@@ -48,7 +47,7 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       ativo: [true],
-      cargo: ['usuario']
+      cargo: ['user']
     });
   }
 
@@ -68,7 +67,6 @@ export class RegisterComponent implements OnInit {
         },
         error: (error) => {
           this.messageService.add({ severity: 'error', summary: 'Erro!', detail: 'Preencha todos os campos!' });
-
         }
       });
     }

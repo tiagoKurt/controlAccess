@@ -1,25 +1,25 @@
 <div class="centered-container">
-  <div class="flex-column gap-2 box-shadow">
+  <div class="flex-column gap-2 box-shadow" [formGroup]="loginForm">
 
       <!-- titulo -->
       <h2 [ngStyle]="{color: 'var(--primary-color)'}">Login</h2>
 
       <!-- input email -->
       <p-floatLabel>
-          <input pInputText id="email" [(ngModel)]="email" />
+          <input pInputText id="email" formControlName="email" />
           <label [ngStyle]="{color: 'var(--primary-color)'}" for="email">E-mail</label>
       </p-floatLabel>
 
       <!-- input senha -->
       <p-floatLabel>
-          <p-password [(ngModel)]="password" [feedback]="false" [toggleMask]="true" />
+          <p-password formControlName="password" [feedback]="false" [toggleMask]="true" />
           <label [ngStyle]="{color: 'var(--primary-color)'}" for="password">Senha</label>
       </p-floatLabel>
       <p-toast/>
       <!-- botão -->
       <div class="btn-container">
 
-          <a><p-button label="Entrar" [raised]="true"/></a>
+          <a><p-button label="Entrar" [raised]="true" (click)="userLogin()"/></a>
       </div>
 
       <!-- botão cadastro -->

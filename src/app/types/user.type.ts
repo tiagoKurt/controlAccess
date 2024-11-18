@@ -2,7 +2,7 @@ export interface IUser{
   id: number;
   nome: string;
   email: string;
-  senha: string;
+  password: string;
   ativo: boolean;
   cargo: string;
 }
