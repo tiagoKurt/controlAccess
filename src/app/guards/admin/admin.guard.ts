@@ -10,7 +10,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
 
   return authService.user$.pipe( // Use o observable user$
     map(user => {
-      if (user && (user.cargo === 'admin' || user.cargo === 'gerente')) {
+      if (user && (user.cargo === 'adm' || user.cargo === 'gerente')) {
         return true;
       } else {
         alert("Acesso negado! Somente Admin ou Gerente podem acessar esta página.");

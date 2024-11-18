@@ -5,6 +5,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { userGuard } from './guards/auth/user.guard';
 import { adminGuard } from './guards/admin/admin.guard';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -12,5 +13,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [userGuard] },
-  { path: 'usersList', component: ProfileComponent, canActivate: [adminGuard] }
+  { path: 'usersList', component: UserListComponent,
+    canActivate: [adminGuard]
+  }
 ];

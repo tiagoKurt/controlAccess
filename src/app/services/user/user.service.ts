@@ -21,8 +21,8 @@ export class UserService {
     return this.userId;
   }
 
-  getUsers(): Observable<IUser>{
-    return this._http.get<IUser>(this.apiUrl);
+  getUsers(): Observable<IUser[]>{
+    return this._http.get<IUser[]>(this.apiUrl);
   }
 
   storeUser(usuario: IUser): Observable<IUser>{

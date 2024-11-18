@@ -1,0 +1,71 @@
+<div class="card">
+  <h2 [ngStyle]="{color: 'var(--primary-color)'}" style="display: flex; justify-content: center;">Lista dos usuários cadastrados</h2>
+  <p-toast></p-toast>
+  <p-table [value]="usersList" dataKey="id" editMode="row" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="width:25%">Nome</th>
+              <th style="width:25%">Email</th>
+              <th style="width:25%">Ativo</th>
+              <th style="width:25%">Cargo</th>
+              <th style="width:20%"></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user let-editing="editing" let-ri="rowIndex">
+          <tr [pEditableRow]="user">
+              <td>{{user.nome}}</td>
+              <td>{{user.email}}</td>
+              <td>
+                  <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <p-dropdown
+                              [options]="activeOptions"
+                              appendTo="body"
+                              [(ngModel)]="user.ativo"
+                              [style]="{'width':'100%'}">
+                          </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          {{user.ativo ? 'Ativado' : 'Desativado'}}
+                      </ng-template>
+                  </p-cellEditor>
+              </td>
+              <td>{{getRoleLabel(user.cargo)}}</td>
+              <td>
+                  <div class="flex align-items-center justify-content-center gap-2">
+                      <button
+                          *ngIf="!editing"
+                          pButton
+                          pRipple
+                          type="button"
+                          pInitEditableRow
+                          icon="pi pi-pencil"
+                          (click)="onRowEditInit(user)"
+                          class="p-button-rounded p-button-text">
+                      </button>
+                      <button
+                        *ngIf="editing"
+                        pButton
+                        pRipple
+                        type="button"
+                        pSaveEditableRow
+                        icon="pi pi-check"
+                        (click)="onRowEditSave(user, user.id)"
+                        class="p-button-rounded p-button-text p-button-success mr-2">
+                      </button>
+                      <button
+                          *ngIf="editing"
+                          pButton
+                          pRipple
+                          type="button"
+                          pCancelEditableRow
+                          icon="pi pi-times"
+                          (click)="onRowEditCancel(user, ri)"
+                          class="p-button-rounded p-button-text p-button-danger">
+                      </button>
+                  </div>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
