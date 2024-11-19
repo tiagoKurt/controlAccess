@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { ButtonModule } from 'primeng/button';
 import { CommonModule, NgStyle } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { AvatarModule } from 'primeng/avatar';
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import { RouterModule } from '@angular/router';
-import { AvatarModule } from 'primeng/avatar';
-import { DropdownModule } from 'primeng/dropdown';
-import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { UserService } from '../../services/user/user.service';
 
@@ -37,17 +37,23 @@ import { UserService } from '../../services/user/user.service';
 export class RegisterComponent implements OnInit {
 
   userForm: FormGroup;
+    cargos : {label: string, value: string}[]
+
 
   constructor(private fb: FormBuilder,
               private _userService: UserService,
               private messageService: MessageService) {
-
+    this.cargos = [
+      { label: 'Usuário', value: 'ROLE_USUARIO' },
+      { label: 'Gerente', value: 'ROLE_GERENTE' },
+      { label: 'Administrador', value: 'ROLE_ADMIN' }
+    ]
     this.userForm = this.fb.group({
-      name: ['', Validators.required],
+      nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      ativo: [true],
-      cargo: ['user']
+      ativo: true,
+      cargo: ['',Validators.required]
     });
   }
 

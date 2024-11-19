@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {FloatLabelModule } from 'primeng/floatlabel';
-import { ButtonModule } from 'primeng/button';
 import { NgStyle } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { AvatarModule } from 'primeng/avatar';
+import { ButtonModule } from 'primeng/button';
+import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import { Router, RouterModule } from '@angular/router';
-import { AvatarModule } from 'primeng/avatar';
-import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -40,10 +40,17 @@ export class LoginComponent implements OnInit{
 
   userLogin(){
     if (this.loginForm.valid) {
-      this._authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).then(loginSucesso =>{
-        if(!loginSucesso){
+      const user = {
+        email : this.loginForm.get('email')?.value,
+        password: this.loginForm.get('password')?.value
+      }
+      this._authService.login(user).then(token =>{
+
+        if(!token){
           this.messageService.add({severity: 'error', summary: 'Erro!', detail: 'Email ou senha incorretos!',
           });
+        }else{
+          this.messageService.add({severity: 'success', summary: 'Sucesso!', detail: 'Login efetuado com sucesso!'});
         }
       })
     }else{

@@ -1,15 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { MenubarComponent } from "./components/menubar/menubar.component";
 import { filter } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { MenubarComponent } from "./components/menubar/menubar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, MenubarComponent, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss'  
 })
 export class AppComponent implements OnInit {
   showMenuBar = true;

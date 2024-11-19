@@ -1,1 +1,10 @@
 <h2 [ngStyle]="{color: 'var(--primary-color)'}" style="display: flex; justify-content: center;">Perfil do usuário</h2>
+<h2>
+    <span [ngStyle]="{color: 'var(--primary-color)'}">Nome:</span> {{ user.nome }}
+</h2>
+<h2>
+    <span [ngStyle]="{color: 'var(--primary-color)'}">Email:</span> {{ user.email }}
+</h2>
+<h2>
+    <span [ngStyle]="{color: 'var(--primary-color)'}">Cargo:</span> {{ user.cargo }}
+</h2>

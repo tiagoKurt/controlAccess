@@ -8,7 +8,7 @@ import { IUser } from '../../types/user.type';
 })
 export class AdminService {
 
-  apiUrl = 'http://localhost:3000/usuarios/'
+  apiUrl = 'http://localhost:8080/api/usuarios/alterar'
 
   constructor(private _http : HttpClient) { }
 

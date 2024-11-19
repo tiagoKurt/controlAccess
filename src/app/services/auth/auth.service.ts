@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
-import { IUser } from '../../types/user.type';
+import { AuthResponse } from '../../types/auth.type';
+import { loginUser } from '../../types/user.type';
+import { LocalStorageService } from '../token/token.service';
 import { UserService } from '../user/user.service';
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/usuarios';
+  private apiUrl = 'http://localhost:8080/api/usuario/login';
   private authSubject = new BehaviorSubject<any>(null); // Use um BehaviorSubject
   user$ = this.authSubject.asObservable(); // Observable público para o usuário
 
@@ -18,28 +19,29 @@ export class AuthService {
     private router: Router,
     private messageService: MessageService,
     private http: HttpClient,
-    private _userStateService: UserService
+    private _userStateService: UserService,
+    private _tokenService: LocalStorageService
   ) {}
 
-  async login(email: string, password: string): Promise<boolean> {
-      const users = await this.http
-        .get<any[]>(this.apiUrl)
-        .toPromise();
+  
+  async login(usuario : loginUser){
+      const response = await this.http
+        .post<AuthResponse>(this.apiUrl,usuario)
+        .toPromise().then((response) => {
+          return response;
+        });
 
-      if (users) {
-        const user = users.find(u => u.email === email && u.password === password);
-
-        if (user) {
-          this.setAuthState(user);
-          this._userStateService.setUserId(user.id);
-
-          this.router.navigate(['/profile']);
-          return true;
+        if (response) {
+          this._tokenService.setItem("token", response.token);
+          this._userStateService.setToken(response.token);
+          this.setAuthState(response.token);
+          return this.router.navigate(['/profile']);
         }
+       else{
+        return;
+       }
       }
-
-    return false;
-  }
+  
 
 
   logout(): void {
@@ -50,7 +52,6 @@ export class AuthService {
   private setAuthState(user: any): void {
     this.authSubject.next(user); // Atualize o BehaviorSubject
   }
-
   get isAutenticado(): boolean {
     // Getter para isAutenticado
     return !!this.authSubject.value; // Retorna true se houver um usuário
